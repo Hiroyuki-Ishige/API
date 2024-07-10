@@ -129,7 +129,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# secret folder
-secret/
+# secret file
 
-.alphaAPI.txt
+#alphaAPI.txt
