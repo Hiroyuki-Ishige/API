@@ -131,3 +131,5 @@ dist
 
 # secret folder
 secret/
+
+.alphaAPI.txt
