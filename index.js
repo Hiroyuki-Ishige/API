@@ -18,7 +18,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended:true}));
 
 app.get("/", (req, res,)=>{    
-    res.render("index.ejs", {sample: "changed folder name"})
+    res.render("index.ejs", {sample: "changed folder name v2"})
 });
 
 app.listen(port, ()=>{
