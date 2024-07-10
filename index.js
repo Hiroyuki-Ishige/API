@@ -1,3 +1,8 @@
+//Public API list: https://github.com/appbrewery/public-api-lists/tree/master
+// Alpha Vantage API documentation: https://www.alphavantage.co/documentation/ 
+
+
+
 import express from "express";
 import {dirname} from "path";
 import {fileURLToPath} from "url";
@@ -12,10 +17,8 @@ app.use(express.static("public"));
 
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.get("/", (req, res,)=>{
-
-    
-    res.render("index.ejs", {sample: "sample word"})
+app.get("/", (req, res,)=>{    
+    res.render("index.ejs", {sample: "changed folder name"})
 });
 
 app.listen(port, ()=>{
