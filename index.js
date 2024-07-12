@@ -20,7 +20,7 @@ async function readFile() {
     console.error(err);
     throw err; // Re-throw the error after logging it
   }
-};
+}
 
 // connect to static files such as CSS under "public".
 app.use(express.static("public"));
@@ -30,35 +30,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get("/", async (req, res) => {
   try {
     const apiKey = await readFile(); //Await the promise to get the API key
-    console.log(apiKey);
+    
     res.render("index.ejs", { sample: "Please select ticker" });
   } catch (err) {
     res.status(500).send("Internal Server Error");
-  };
-
+  }
 });
 
-//get data for xlp
-app.get("/xlp", async (req, res) => {
+//get data for selected ticker
+app.post("/ticker", async (req, res) => {
+  const ticker = req.body.ticker; //correct ticker posted from client
+
   try {
     const apiKey = await readFile(); //Await the promise to get the API key
-    const url= `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=xlp&interval=5min&apikey=${apiKey}`;
+    const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${ticker}&interval=5min&apikey=${apiKey}`;
 
-    console.log(apiKey);
+    //console.log(apiKey);
     console.log(url);
 
     const result = await axios.get(url);
+    const data = result.data
     const prettyResult = JSON.stringify(result.data, null, 2);
-      
-    console.log (prettyResult);
-    res.render("index.ejs", { content: result});  
+    console.log(prettyResult);
     
+    res.render("index.ejs", { content: data });
   } catch (err) {
     res.status(500).send("Internal Server Error");
-  };  
+  }
 });
-
-
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
