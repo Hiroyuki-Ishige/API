@@ -29,7 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/", async (req, res) => {
   try {
-    const apiKey = await readFile(); //Await the promise to get the API key
     
     res.render("index.ejs", { sample: "Please select ticker" });
   } catch (err) {
